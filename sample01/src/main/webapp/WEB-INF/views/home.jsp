@@ -9,33 +9,23 @@
 </head>
 <%@ include file = "include/header.jsp" %>
 <body>
-<style type="text/css">
-a:link { color:black;text-decoration:none; }
-a:visited { color:black;text-decoration:none; }
-a:hover { color:black;text-decoration:none; }
-
-</style>
-
 <div align="center">
 	<tr>
 		<th><a href="${path}/ftp/fileupload">&nbsp; 파일업로드 &nbsp;</a></th>
-		<th><a href="${path}/study">&nbsp; 숙제  &nbsp;</a></th>
-		<th><a href="${path}/userList">&nbsp; 회원목록  &nbsp;</a></th>
-		
+		<th><a href="${path}/study">&nbsp; Study  &nbsp;</a></th>	
+		<th><a href="${path}/user/login">&nbsp; login  &nbsp;</a></th>	
 	</tr>
 </div>
 <div class="mainSlider">
 <h1 align="center">
-	Hello world!  
+	Hello world!  <br>
 	메인입니다.
 </h1>
 </div>
 <div>
 	<table>
-	<tr>
-		<th>1</th>
-		<th>2</th>
-	</tr>
+	<tr>adfasd</tr>
+	<tr></tr>
 	</table>
 </div>
 

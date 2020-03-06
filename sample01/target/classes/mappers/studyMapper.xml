@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.study">
+
+    <!-- 액터 리스트  -->
+	<select id="userList" resultType="Map">
+	SELECT * FROM ACTOR
+	</select>
+	
+	<!-- 영화 리스트  -->
+	<select id="filmList" resultType="Map" parameterType="String">
+	SELECT  FILM_ID       AS  filmId
+	     ,  TITLE		  AS  title
+	     ,  DESCRIPTION   AS  description
+	  FROM  FILM LIMIT #{cnt} OFFSET #{start}
+	</select>
+	
+	<!-- 대여목록 카운트 -->
+	<select id="rentailCnt" resultType="int" parameterMap="String">
+	SELECT COUNT(*) AS cnt
+	  FROM inventory I 
+	  LEFT OUTER JOIN (
+	                   SELECT R2.inventory_id
+	                        , MAX(R2.rental_id)  AS rental_id
+	                     FROM rental R2
+	                    GROUP BY R2.inventory_id ORDER BY R2.inventory_id     
+	                   )
+	       R ON R.inventory_id = I.inventory_id           
+	  LEFT OUTER JOIN rental R3 ON R3.RENTAL_ID = R.RENTAL_ID   
+	  LEFT OUTER JOIN customer C ON C.customer_id = R3.customer_id
+	 INNER JOIN film F ON I.FILM_ID = F.FILM_ID 
+	 <!-- DB 구조상 STORE 테이블과 조인을 하지 않아도 INVENTORY 테이블에서 STORE_ID를 가져올 수 있음 -->
+	 INNER JOIN store S ON I.STORE_ID = S.STORE_ID  
+	 
+	 WHERE F.TITLE LIKE CONCAT(#{filmTitle},'%') 
+	</select>
+	
+	<!-- 대여 목록  -->
+	<select id="rentalList" resultType="Map" parameterType="String">
+	SELECT
+	       F.TITLE             AS  title
+	     , I.STORE_ID          AS  storeId
+	     , I.inventory_id      AS  invenId
+	     , CONCAT(C.first_name, CONCAT("-",C.last_name)) AS  customerNm	    
+	  FROM inventory I 
+	  LEFT OUTER JOIN (
+	                   SELECT R2.inventory_id
+	                        , MAX(R2.rental_id)  AS rental_id
+	                     FROM rental R2
+	                    GROUP BY R2.inventory_id ORDER BY R2.inventory_id     
+	                   )
+	       R ON R.inventory_id = I.inventory_id           
+	  LEFT OUTER JOIN rental R3 ON R3.RENTAL_ID = R.RENTAL_ID   
+	  LEFT OUTER JOIN customer C ON C.customer_id = R3.customer_id
+	 INNER JOIN film F ON I.FILM_ID = F.FILM_ID 
+	 <!-- DB 구조상 STORE 테이블과 조인을 하지 않아도 INVENTORY 테이블에서 STORE_ID를 가져올 수 있음 -->
+	 INNER JOIN store S ON I.STORE_ID = S.STORE_ID  
+	 
+	 WHERE F.TITLE LIKE CONCAT(#{filmTitle},'%') 
+	 LIMIT #{startList}, #{listSize}
+	   
+	</select>
+	
+</mapper>

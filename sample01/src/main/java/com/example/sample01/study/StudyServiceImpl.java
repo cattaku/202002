@@ -1,0 +1,68 @@
+package com.example.sample01.study;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.sample01.common.Pagination;
+
+@Service
+public class StudyServiceImpl {
+
+	@Autowired
+	SqlSession sql;
+
+	/* 영화 목록 */
+	public List<Map<String, Object>> filmList(int start) throws Exception {
+
+		int cnt = 10;
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("cnt", cnt);
+
+		List<Map<String, Object>> list = sql.selectList("mapper.study.filmList", map);
+		return list;
+
+	}
+
+	/* 대여 목록 */
+//	public Map<String, Object> RentalList(String filmTitle) throws Exception {
+//
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("filmTitle", filmTitle);
+//		List<Map<String, Object>> list = sql.selectList("mapper.study.rentalList");
+//		
+//		  int listCnt = sql.selectOne("mapper.study.rentailCnt");
+//		  
+//		  
+//		  
+//		  map.put("list", list); map.put("listCnt", listCnt);
+//		 
+//
+//		return;
+//
+//	}
+	public Map<String, Object> rentalList(String filmTitle, int page, int range) throws Exception {
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		List<Map<String, Object>> list = sql.selectList("mapper.study.rentalList", filmTitle);
+		int listCnt = sql.selectOne("mapper.study.rentailCnt", filmTitle);
+		
+		Pagination pagination = new Pagination();
+		
+		
+		resultMap.put("pagination", pagination); /****/
+		resultMap.put("filmTitle", filmTitle);
+		resultMap.put("filmTitle", filmTitle);
+		resultMap.put("list", list);
+		resultMap.put("listCnt", listCnt);
+		
+		return resultMap;
+		
+	}
+}

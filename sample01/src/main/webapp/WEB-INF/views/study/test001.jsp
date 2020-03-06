@@ -57,7 +57,8 @@
 				testHtmlbody += "<th>" + dataObj[i].date + "</th>"; 
 				testHtmlbody += "</tr>"
 			 } 
-			$("#testBody").html(testHtmlbody);  // html 또는 append 
+			
+			 $("#testBody").html(testHtmlbody);  // html 또는 append 
 			 // html은 선택한 요소를 지우고 추가됨.
 			 // append 선택한 요소를 유지시키고 마지막 부분에 추가함.
 			 

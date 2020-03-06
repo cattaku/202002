@@ -9,7 +9,7 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+
 	<!-- Application Loggers -->
 	<logger name="com.example.sample01">
 		<level value="info" />
@@ -31,6 +31,29 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+
+
+
+	<!-- Query Loggers --> 
+	<logger name="jdbc.sqlonly" additivity="false"> 
+		<level value="DEBUG"/> 
+		<appender-ref ref="console"/> 
+	</logger> 
+	<logger name="jdbc.resultsettable" additivity="false"> 
+		<level value="DEBUG"/> 
+		<appender-ref ref="console"/> 
+	</logger>
+	
+	<logger name="org.springframework" level="DEBUG " additivity="false">
+     	<appender-ref ref="console" />
+	</logger>
+  
+	<logger name="org.mybatis" level="DEBUG "  additivity="false">
+    	<appender-ref ref="console" />
+	</logger>
+
+
+출처: https://yamea-guide.tistory.com/108 [기타치는 개발자의 야매 가이드]
 
 	<!-- Root Logger -->
 	<root>

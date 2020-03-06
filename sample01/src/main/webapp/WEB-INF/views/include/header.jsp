@@ -4,4 +4,5 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="/webapp/resources/css/common.css" type="text/css">
+<link rel="stylesheet" href="../resources/css/common.css" type="text/css">
+<button id="homeBtn" onclick="location.href='/'">&nbsp; home &nbsp;</button>
