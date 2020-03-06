@@ -47,12 +47,12 @@ public class StudyController {
 	
 	@RequestMapping("getRentalList")
 	@ResponseBody
-	public Map<String, Object> getRentalList(@RequestParam String filmTitle,
-										     @RequestParam(required=false, defaultValue="1")int page,
-										     @RequestParam(required=false, defaultValue="1")int range
+	public Map<String, Object> getRentalList(@RequestParam String filmTitle
+										    /* @RequestParam(required=false, defaultValue="1")int page,
+										     @RequestParam(required=false, defaultValue="1")int range*/
 	) throws Exception {
 		
-		Map<String, Object> resultMap = studyService.rentalList(filmTitle, page, range);
+		Map<String, Object> resultMap = studyService.rentalList(filmTitle);
 			
 		return resultMap;
 	}	

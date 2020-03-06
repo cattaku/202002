@@ -47,8 +47,8 @@
 		<tbody id="listBody">
 		</tbody>
 	</table>
-	
 	</div>
+	
 	
 </div>
 </body>
@@ -78,14 +78,9 @@ function rentalSearch() {
 		data : { "filmTitle":filmTitle },
 		dataType : "json",
 		success : function(data) {
-			var listData = data;
+			var listData = data.list;
 			var listBodyHtml = "";
-			
-			console.log("data", data);
-			
-			
-			
-			
+	
 			if(listData.length > 0){
 				for(var i=0; i < listData.length; i++){
 					var idx = Number(i)+1;
@@ -99,6 +94,7 @@ function rentalSearch() {
 					listBodyHtml += "</tr>";
 				}
 				$("#listBody").html(listBodyHtml);
+				
 				//선택행에 스타일 
 				$("#listBody tr").on('click', function() {
 					$(this).siblings().removeClass("row");
@@ -108,7 +104,5 @@ function rentalSearch() {
 		}
 	});  
 }
-
-
 
 </script>

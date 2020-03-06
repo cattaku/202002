@@ -11,6 +11,7 @@ public class PageTest {
 		
 		Pagination pagination = new Pagination();
 		pagination.pageInfo(20, 11, 300);
+		//pagination.pageInfo(page, range, listCnt);
 		
 		System.out.println("pageInfo"+ pagination.toString());
 		
