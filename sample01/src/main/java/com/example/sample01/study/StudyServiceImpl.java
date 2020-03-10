@@ -30,18 +30,15 @@ public class StudyServiceImpl {
 	}
 
 	/* 대여 목록 */
-	public Map<String, Object> rentalList(String filmTitle) throws Exception {
+	public Map<String, Object> rentalList(String filmTitle, int startList) throws Exception {
 		
 		Map<String, Object> resultMap = new HashMap<>();
-		
-		List<Map<String, Object>> list = sql.selectList("mapper.study.rentalList", filmTitle);
-		int listCnt = sql.selectOne("mapper.study.rentalCnt", filmTitle); 
-		
-		Pagination pagination = new Pagination();
-		
-		
-		resultMap.put("pagination", pagination); /****/
 		resultMap.put("filmTitle", filmTitle);
+		resultMap.put("startList", startList);
+		
+		List<Map<String, Object>> list = sql.selectList("mapper.study.rentalList", resultMap);
+		int listCnt = sql.selectOne("mapper.study.rentalCnt", resultMap); 
+		
 		resultMap.put("list", list);
 		resultMap.put("listCnt", listCnt); 
 		

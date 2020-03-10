@@ -26,12 +26,14 @@ public class StudyController {
 		return "/study/test001";
 	}
 	
+	//영화리스트
 	@RequestMapping("filmList")
 	public String filmList(Model model) throws Exception {
 
 		return "/study/filmList";
 	}
 	
+	//영화리스트 검색
 	@RequestMapping("getfilmList")
 	@ResponseBody
 	public List<Map<String, Object>> getList(@RequestParam int startNum) throws Exception {
@@ -40,19 +42,19 @@ public class StudyController {
 		return list;
 	}
 	
+	// 렌탈 페이지
 	@RequestMapping("rentalList")
 	public String rentalList() throws Exception {
 		return "/study/rentalList";
 	}
 	
+	// 렌탈 리스트 검색
 	@RequestMapping("getRentalList")
 	@ResponseBody
-	public Map<String, Object> getRentalList(@RequestParam String filmTitle
-										    /* @RequestParam(required=false, defaultValue="1")int page,
-										     @RequestParam(required=false, defaultValue="1")int range*/
-	) throws Exception {
+	public Map<String, Object> getRentalList(@RequestParam String filmTitle,
+			                                 @RequestParam int startList) throws Exception {
 		
-		Map<String, Object> resultMap = studyService.rentalList(filmTitle);
+		Map<String, Object> resultMap = studyService.rentalList(filmTitle, startList);
 			
 		return resultMap;
 	}	

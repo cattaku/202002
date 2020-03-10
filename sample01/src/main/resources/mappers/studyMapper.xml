@@ -57,7 +57,7 @@
 	 INNER JOIN store S ON I.STORE_ID = S.STORE_ID  
 	 
 	 WHERE F.TITLE LIKE CONCAT(#{filmTitle},'%') 
-	 LIMIT 10
+	 LIMIT 10, #{startList}
 	   
 	</select>
 	
